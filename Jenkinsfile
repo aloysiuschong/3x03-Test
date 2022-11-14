@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('OWASP DependencyCheck') {
+    stage('') {
       steps {
-        dependencyCheck(additionalArguments: '--format HTML --format XML', odcInstallation: 'Default')
+        echo 'test'
       }
     }
 
