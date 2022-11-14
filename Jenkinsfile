@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Checkout SCM') {
       steps {
-        git 'https://github.com/aloysiuschong/3x03-Test'
+        git(url: 'https://github.com/aloysiuschong/3x03-Test', branch: 'master')
       }
     }
 
