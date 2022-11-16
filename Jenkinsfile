@@ -20,5 +20,11 @@ pipeline {
 				dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'OWASP-Dependency-Check'
 			}
 		}
+
+		stage ('Checkout') {
+			steps {
+				git branch:'master', url: 'https://github.com/ScaleSec/vulnado.git'
+			}
+		}
 	}
 }

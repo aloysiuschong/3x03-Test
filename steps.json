@@ -6,7 +6,8 @@
         "step-" : "",
         "git credentials": "git config --global credential.helper store",
         "jenkins-password" : "29f8bfb22b9749bd84777136eb86cdfc",
-        "sonarqube-token" : "2b24e8eb147cf75f81b247387d7990b57e3f3c20"
+        "sonarqube-token" : "2b24e8eb147cf75f81b247387d7990b57e3f3c20",
+        "github token" : "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"
     },
     {
         "SETUP-VM" : "",
