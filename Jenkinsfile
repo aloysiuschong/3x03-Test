@@ -1,6 +1,26 @@
 pipeline {
 	agent none
 	stages {
+		stage('Checkout SCM') {
+			steps {
+				git '/home/JenkinsDependencyCheckTest'
+			}
+		}
+		stage('OWASP DependencyCheck') {
+			steps {
+				dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default'
+			}
+		}
+		stage('Build') {
+			steps {
+				sh 'composer install'
+			}
+		}
+		stage('Test') {
+			steps {
+                sh './vendor/bin/phpunit --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
+            }
+		}
 		stage('Integration UI Test') {
 			parallel {
 				stage('Deploy') {
