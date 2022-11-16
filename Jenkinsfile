@@ -17,14 +17,23 @@ pipeline {
         }
 		stage('OWASP DependencyCheck') {
 			steps {
+				echo 'OWASP Dependency Check'
 				dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'OWASP-Dependency-Check'
 			}
 		}
 
-		stage ('Checkout') {
-			steps {
-				git branch:'master', url: 'https://github.com/ScaleSec/vulnado.git'
-			}
+		stage('Static Code Analyis') {
+             steps {
+                echo 'Analyzing code'
+                Generate pylint warning report
+                sh 'pylint *.py > reports/pylint.report | echo 1'
+                sh 'docker-compose exec -T flask-app sh -c "python3 -m bandit -r ."'
+        	}
+        }
+	}
+	post {
+		success {
+			dependencyCheckPublisher pattern: 'dependency-check-report.xml'
 		}
 	}
 }
