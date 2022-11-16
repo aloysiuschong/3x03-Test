@@ -25,7 +25,6 @@ pipeline {
 		stage('Static Code Analyis') {
              steps {
                 echo 'Analyzing code'
-                Generate pylint warning report
                 sh 'pylint *.py > reports/pylint.report | echo 1'
                 sh 'docker-compose exec -T flask-app sh -c "python3 -m bandit -r ."'
         	}
