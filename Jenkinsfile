@@ -12,6 +12,9 @@ pipeline {
 
                 //For static code analysis setup
                 sh 'apt-get install -y python3-pip'
+				sh 'pip install docker-compose'
+				sh 'pip install Flask'
+				sh 'pip install selenium'
                 //sh 'pip install -r requirements.txt'
             }
         }
