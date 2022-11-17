@@ -26,10 +26,16 @@ pipeline {
 		}
 
 
+		stage('Unit Test') {
+            steps {
+                echo 'Running unit test'
+                sh 'docker-compose exec -T flask-app sh -c "python3 -m unittest tests/unit/test.py"' 
+            }
+        }
 		stage('Selenium Test') {
             steps {
                 echo 'Running UI test'
-                sh 'docker-compose exec -T flask-app sh -c "python3 -m unittest -v tests/selenium/test.py" | echo 1'
+                sh 'docker-compose exec -T flask-app sh -c "python3 -m unittest -v tests/selenium/test.py"'
             }
         }
 
