@@ -51,6 +51,7 @@ pipeline {
 	}
 	post {
 		always {
+			echo 'ended'
 			//junit testResults: '**/target/surefire-reports/TEST-*.xml'
 			//recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
 			//recordIssues enabledForFailure: true, tool: checkStyle()
