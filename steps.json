@@ -86,12 +86,24 @@
         "step-11" : "Uncomment the Jenkinsfile code"
     }
     
-]
 
-docker run --name jenkins-blueocean --rm --detach ^
+
+{
+    
+"docker run --name jenkins-blueocean --rm --detach ^
 --user root ^
 --volume /var/run/docker.sock:/var/run/docker.sock ^
 --volume jenkins-data:/var/jenkins_home ^
 --volume "%HOMEDRIVE%%HOMEPATH%":/home ^
---publish 8080:8080 updated_jenkins:latest
+--publish 8080:8080 updated_jenkins:latest"
 
+"docker run --name jenkins-docker --rm --detach ^
+--privileged --network jenkins --network-alias docker ^
+--env DOCKER_TLS_CERTDIR=/certs ^
+--volume jenkins-docker-certs:/certs/client ^
+--volume jenkins-data:/var/jenkins_home ^
+--publish 2376:2376 ^
+docker:dind"
+
+}
+]
