@@ -21,7 +21,6 @@ pipeline {
 				//sh 'docker-machine create default'
 				//sh 'export DOCKER_MACHINE_NAME=default'
 				//sh 'export DOCKER_TLS_VERIFY=1'
-				//sh 'export DOCKER_CERT_PATH=~/.docker/machine/machines/default'
 				//sh 'docker-machine regenerate-certs default'
                 //sh 'pip install -r requirements.txt'
             }
@@ -37,11 +36,17 @@ pipeline {
             steps {
                 echo 'Building Environment'
                 //sh 'docker network create selenium_network || echo selenium_network exists'
-                sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml down'
-                sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml up --build -d'
-                sh 'docker-compose ps'
+                //sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml down'
+                //sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml up --build -d'
+                //sh 'docker-compose ps'
             }
         }
+
+		stage('Deploy'){
+        	steps {
+                sh "docker compose up -d"
+        	}
+        }    
 
 		stage ('Checkout') {
 			steps {

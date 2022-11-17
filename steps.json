@@ -87,3 +87,11 @@
     }
     
 ]
+
+docker run --name jenkins-blueocean --rm --detach ^
+--user root ^
+--volume /var/run/docker.sock:/var/run/docker.sock ^
+--volume jenkins-data:/var/jenkins_home ^
+--volume "%HOMEDRIVE%%HOMEPATH%":/home ^
+--publish 8080:8080 updated_jenkins:latest
+
