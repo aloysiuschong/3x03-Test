@@ -12,10 +12,17 @@ pipeline {
 
                 //For static code analysis setup
                 sh 'apt-get install -y python3-pip'
+				//sh 'apt install virtualbox'
 				sh 'pip install docker-compose'
 				sh 'pip install Flask'
 				sh 'pip install selenium'
 				sh 'apt-get install ca-certificates curl gnupg lsb-release -y'
+
+				//sh 'docker-machine create default'
+				//sh 'export DOCKER_MACHINE_NAME=default'
+				//sh 'export DOCKER_TLS_VERIFY=1'
+				//sh 'export DOCKER_CERT_PATH=~/.docker/machine/machines/default'
+				//sh 'docker-machine regenerate-certs default'
                 //sh 'pip install -r requirements.txt'
             }
         }
@@ -26,19 +33,19 @@ pipeline {
 			}
 		}
 
-		stage('Build Test-Env') {
-            steps {
-                echo 'Building Environment'
-                sh 'docker network create selenium_network || echo selenium_network exists'
-                sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml down'
-                sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml up --build -d'
-                sh 'docker-compose ps'
-            }
-        }
+		//stage('Build Test-Env') {
+        //    steps {
+        //        echo 'Building Environment'
+        //        sh 'docker network create selenium_network || echo selenium_network exists'
+        //        sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml down'
+        //        sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml up --build -d'
+        //        sh 'docker-compose ps'
+        //    }
+        //}
 
 		stage ('Checkout') {
 			steps {
-				git branch:'master', url: 'https://github.com/ScaleSec/vulnado.git'
+				git branch:'master', url: 'https://github.com/aloysiuschong/3x03-Test.git'
 			}
 		}
 		stage ('Build') {
