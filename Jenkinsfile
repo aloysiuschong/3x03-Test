@@ -33,15 +33,15 @@ pipeline {
 			}
 		}
 
-		//stage('Build Test-Env') {
-        //    steps {
-        //        echo 'Building Environment'
-        //        sh 'docker network create selenium_network || echo selenium_network exists'
-        //        sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml down'
-        //        sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml up --build -d'
-        //        sh 'docker-compose ps'
-        //    }
-        //}
+		stage('Build Test-Env') {
+            steps {
+                echo 'Building Environment'
+                //sh 'docker network create selenium_network || echo selenium_network exists'
+                sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml down'
+                sh 'docker-compose -f docker-compose.yml -f docker-compose.test.yml -f docker-compose.selenium.yml up --build -d'
+                sh 'docker-compose ps'
+            }
+        }
 
 		stage ('Checkout') {
 			steps {
