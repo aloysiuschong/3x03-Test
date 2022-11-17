@@ -15,6 +15,7 @@ pipeline {
 				sh 'pip install docker-compose'
 				sh 'pip install Flask'
 				sh 'pip install selenium'
+				sh 'apt-get install ca-certificates curl gnupg lsb-release -y'
                 //sh 'pip install -r requirements.txt'
             }
         }
@@ -25,13 +26,6 @@ pipeline {
 			}
 		}
 
-
-		stage('Unit Test') {
-            steps {
-                echo 'Running unit test'
-                sh 'docker-compose exec -T flask-app sh -c "python3 -m unittest tests/unit/test.py"' 
-            }
-        }
 		stage('Selenium Test') {
             steps {
                 echo 'Running UI test'
